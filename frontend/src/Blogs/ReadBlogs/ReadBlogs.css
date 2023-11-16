@@ -1,0 +1,32 @@
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.blog-container {
+  grid-column: 1/3;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  /* justify-content: center; */
+  /* grid-auto-flow: row; */
+}
+.loadMore {
+}
+
+.category-container {
+  grid-column: 3/4;
+}
+
+@media (max-width: 599px) {
+  /* … */
+  .blog-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .blog-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
