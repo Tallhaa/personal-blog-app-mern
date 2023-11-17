@@ -6,16 +6,10 @@ const ReadBlogs = () => {
   const [blogs,setBlogs] = useState([])
   const AllBlogsList = async() =>{
     try{
-      let blogList = await fetch(`http://localhost:5000/all-blogs`);
-      if(blogList.ok){
+      let blogList = await fetch(`http://localhost:5000/`);
         blogList = await blogList.json()
         setBlogs(blogList)
         console.log('all blogs fetched',blogList);
-      }
-      else{
-        console.log('Failed to fetch all blogs');
-      }
-      
       }catch(err){
           console.log("failed to fetch all blogs",err);
       }      

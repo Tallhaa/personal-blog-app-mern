@@ -1,7 +1,8 @@
 .blog-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr) 1fr;
   gap: 10px;
+  align-items: start;
 }
 
 .blog-container {
@@ -15,6 +16,8 @@
 
 .category-container {
   grid-column: 3/4;
+  position: sticky;
+  top: 50px;
 }
 
 @media (max-width: 599px) {

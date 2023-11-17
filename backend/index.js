@@ -22,9 +22,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-app.get('/', (req, res) => {
-    res.send('Hello Talha')
-})
+// add blog 
 
 app.post("/add-blog", upload.single("image"), async (req, resp) => {
 
@@ -46,7 +44,10 @@ app.post("/add-blog", upload.single("image"), async (req, resp) => {
 
 });
 
-app.get("/all-blogs", async (req, resp) => {
+
+// get all blog 
+
+app.get("/", async (req, resp) => {
     try {
         let result = await Article.find({})
         if (result.length > 0) {
@@ -58,6 +59,9 @@ app.get("/all-blogs", async (req, resp) => {
         resp.send({ "message": "failed to find all blogs", error: err })
     }
 })
+
+
+// get single blog 
 
 app.get("/blog/:id", async (req, resp) => {
     try {
@@ -73,9 +77,23 @@ app.get("/blog/:id", async (req, resp) => {
     }
 })
 
-app.delete("/del", async () => {
-    let result = await Article.deleteMany({});
-    resp.send(result)
+
+// delete single blog 
+
+app.delete("/del/:id", async (req, resp) => {
+    try {
+        let deleteBlog = await Article.deleteOne({ _id: req.params.id });
+        if (deleteBlog) {
+            resp.send(deleteBlog);
+        } else {
+            resp.send({ "message": "blog not deleted" })
+        }
+
+    } catch (err) {
+        console.error("Error in MongoDB query:", err);
+        resp.status(500).send({ "error": "Internal Server Error" });
+    }
+
 })
 
 app.listen(port, () => {
