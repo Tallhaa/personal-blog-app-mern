@@ -13,7 +13,7 @@ app.use(cors())
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "./public/images"))
+        cb(null, path.join(__dirname, "/public/images"))
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
@@ -36,7 +36,6 @@ app.post("/add-blog", upload.single("image"), async (req, resp) => {
         let blog = await Article.create({
             title: title,
             description: description,
-            tags: tags,
             image: img
         })
 
@@ -57,6 +56,20 @@ app.get("/all-blogs", async (req, resp) => {
         }
     } catch (err) {
         resp.send({ "message": "failed to find all blogs", error: err })
+    }
+})
+
+app.get("/blog/:id", async (req, resp) => {
+    try {
+        let result = await Article.findOne({ _id: req.params.id });
+        if (result) {
+            resp.send(result)
+        } else {
+            resp.send({ "message": "no blog found" })
+        }
+    } catch (err) {
+        console.error("Error in MongoDB query:", err);
+        resp.status(500).send({ "error": "Internal Server Error" });
     }
 })
 

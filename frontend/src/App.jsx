@@ -3,6 +3,7 @@ import CreateBlog from './Blogs/CreateBlog/CreateBlog'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReadBlogs from './Blogs/ReadBlogs/ReadBlogs';
 import NoPage from './Blogs/NoPage/NoPage';
+import SingleBlog from './Blogs/SingleBlog/SingleBlog';
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
       <Routes>
           <Route path="/" element={<ReadBlogs />} />
           <Route path="/add-blog" element={<CreateBlog />} />
+          <Route path="/blog/:id" element={<SingleBlog />} />
           <Route path="*" element={<NoPage />} />
       </Routes>
     </BrowserRouter>

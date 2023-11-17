@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import BlogCard from "./BlogCard/BlogCard"
 import "./ReadBlogs.css"
 
@@ -10,7 +10,7 @@ const ReadBlogs = () => {
       if(blogList.ok){
         blogList = await blogList.json()
         setBlogs(blogList)
-        console.log('all blogs fetched');
+        console.log('all blogs fetched',blogList);
       }
       else{
         console.log('Failed to fetch all blogs');

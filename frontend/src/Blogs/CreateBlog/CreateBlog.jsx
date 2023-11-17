@@ -59,9 +59,7 @@ const CreateBlog = ()=>{
              console.log(err);
          }      
      }
-     setTitle("")
-     setDescription("")
-     setImage(null)
+    
 
     }
     return(

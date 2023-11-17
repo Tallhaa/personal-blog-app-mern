@@ -1,12 +1,19 @@
 import React from 'react';
 import "./BlogCard.css"
+import {
+  Link
+} from "react-router-dom";
 
-const BlogCard = ({blog}) => {
+const BlogCard = (props) => {
+  const { blog } = props;
   return (
     <div className='blog-card'>
-      <img className='card-img' src={`http://localhost:5000/images/${blog.image}`} alt="" />
+       <Link to={`/blog/${blog._id}`}><img className='card-img' src={`http://localhost:5000/images/${blog.image}`} alt="" />
+</Link>
       <h2>{blog.title}</h2>
-      <p>{blog.description}</p>
+      <p>{ blog.description.slice(0,100)+"..."}</p>
+      <Link to={`/blog/${blog._id}`}><button>Read More</button></Link>
+      
     </div>
   )
 }
