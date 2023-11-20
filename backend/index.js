@@ -77,6 +77,26 @@ app.get("/blog/:id", async (req, resp) => {
     }
 })
 
+// update blog
+
+app.put("/update-blog/:id", upload.none(), async (req, resp) => {
+
+    try {
+        console.log(req.body);
+        let result = await Article.updateOne({ _id: req.params.id }, req.body)
+        if (result) {
+            resp.send(result)
+        } else {
+            resp.send({ "message": "blog not updated" })
+        }
+    } catch (error) {
+        resp.status(500).send("Internal server eroor")
+    }
+
+
+
+})
+
 
 // delete single blog 
 

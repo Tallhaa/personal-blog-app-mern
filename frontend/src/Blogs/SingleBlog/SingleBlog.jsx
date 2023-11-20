@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./SingleBlog.css";
-import {useNavigate, useParams } from 'react-router-dom';
+import {Link, useNavigate, useParams } from 'react-router-dom';
 
 const SingleBlog = () => {
     const [blog,setBlog] = useState({})
@@ -45,7 +45,9 @@ const SingleBlog = () => {
       <div className="single-blog-details">   
       <h2>{blog.title}</h2>
       <img className='single-blog-img' src={blog.image ?`http://localhost:5000/images/${blog.image}` : ''} alt="" />
+      <Link to={`/update-blog/${blog._id}`}>
       <button>Edit</button>
+      </Link>
       <button onClick={()=> handleDeleteBlog(blog._id)}>Delete</button>
       <p>{ blog.description}</p>
 
