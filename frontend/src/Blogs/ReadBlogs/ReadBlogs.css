@@ -15,9 +15,18 @@
 }
 
 .category-container {
+  display: flex;
+  flex-direction: column;
   grid-column: 3/4;
   position: sticky;
   top: 50px;
+}
+.category-container > button {
+  background-color: transparent;
+  max-width: fit-content;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 599px) {

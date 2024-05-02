@@ -27,17 +27,19 @@ const upload = multer({ storage: storage })
 app.post("/add-blog", upload.single("image"), async (req, resp) => {
 
     try {
-        const { title, description, tags } = req.body;
+        const { title, description, tags, category } = req.body;
         console.log(req.body);
         console.log(req.file);
         const img = req.file.filename
         let blog = await Article.create({
             title: title,
             description: description,
-            image: img
+            image: img,
+            category: category
         })
 
         resp.send(blog)
+        console.log(blog);
     } catch (err) {
         resp.send(err)
     }

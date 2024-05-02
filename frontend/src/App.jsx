@@ -5,11 +5,14 @@ import ReadBlogs from './Blogs/ReadBlogs/ReadBlogs';
 import NoPage from './Blogs/NoPage/NoPage';
 import SingleBlog from './Blogs/SingleBlog/SingleBlog';
 import UpdateBlog from './Blogs/ReadBlogs/Update Blog/UpdateBlog';
+import Nav from './components/Nav';
+
 
 function App() {
 
   return (
      <BrowserRouter>
+     <Nav/>
       <Routes>
           <Route path="/" element={<ReadBlogs />} />
           <Route path="/add-blog" element={<CreateBlog />} />

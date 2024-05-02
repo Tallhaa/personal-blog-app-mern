@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
 import "./UpdateBlog.css"
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams} from 'react-router-dom';
 
 const UpdateBlog = () => {
     let {id} = useParams();
-    console.log(id);
+    // console.log(id);
     const Navigate = useNavigate()
     const [title, setTitle] = useState("");
 
@@ -29,48 +29,47 @@ const UpdateBlog = () => {
     useEffect(()=>{
 singleBlogFunction()
     },[])
+  
 
 
     const handleUpdateBlog = async(e)=>{
-        e.preventDefault()
-        if(!title || !description){
-          alert("Enter all field")
-        }
-     else{
- 
-        console.log(title,description);
-
- 
-         let formData = new FormData();
-         formData.append("title",title)
-         formData.append("description",description)
- 
-         try{
-         let updateblog = await fetch(`http://localhost:5000/update-blog/${id}`,{
-            method:"Put",
-            body:formData
-         })
-
-           updateblog = await updateblog.json()
-           console.log(updateblog);
-           console.log('blog successfully created');
+      // let formData = new FormData();
+      // formData.append("title",title);
+      // formData.append("description",description)
+      e.preventDefault();
+   
+      try{
           
-         if(updateblog){
-            console.log('Blog to update blog');
-            console.log(updateblog);
-            // Navigate("/")
-         }
-         else{
-           console.log('Failed to update blog');
-         }
-         
-         }catch(err){
-             console.log(err);
-         }      
-     }
+      let updateblog = await fetch(`http://localhost:5000/update-blog/${id}`,{
+        method:"Put",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body: JSON.stringify({title,description})      
+    });
+    updateblog = await updateblog.json();
+    console.log(updateblog);
+    Navigate("/")
+
     
 
-    }
+      }catch(error){
+        console.log("blog not updated",error);
+
+      }
+ 
+     
+   
+    //   if (updateblog.ok) {
+    //     console.log("Blog updated successfully!");
+    //     Navigate("/");
+    // } else {
+    //     console.error("Failed to update blog!");
+    // }
+
+    
+
+  }
   return (
     <>
     <form onSubmit={handleUpdateBlog}>
@@ -85,12 +84,15 @@ singleBlogFunction()
            <textarea name="" id="" cols="30" rows="10" style={{marginBottom:"10px"}} value={description}
            onChange={(e) => setDescription(e.target.value)}
            ></textarea>
+         
            <button type="submit">Update Blog</button>
+
+   
            
         </div>
         </form>
     </>
   )
-}
+};
 
-export default UpdateBlog
+export default UpdateBlog;
